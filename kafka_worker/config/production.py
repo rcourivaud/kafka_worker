@@ -1,5 +1,6 @@
 from kafka.coordinator.assignors.range import RangePartitionAssignor
 from kafka.coordinator.assignors.roundrobin import RoundRobinPartitionAssignor
+from kafka.client_async import selectors
 import socket
 
 DEFAULT_CONFIG = {
