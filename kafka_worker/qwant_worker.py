@@ -29,5 +29,7 @@ class QwantWorker(QwantProducer, QwantConsumer):
 
 
 if __name__ == "__main__":
-    qw = QwantWorker(bootstrap_servers="localhost:9092", listen_topics=["listen"], answer_topic="response")
+    qw = QwantWorker(bootstrap_servers="localhost:9092",
+                     listen_topics=["listen"],
+                     answer_topic="response")
     qw.launch()
