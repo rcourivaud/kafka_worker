@@ -6,7 +6,7 @@
 import pytest
 
 
-from kafka_worker import kafka_worker
+from kafka_worker import qwant_worker
 
 
 @pytest.fixture
