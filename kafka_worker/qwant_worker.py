@@ -20,13 +20,13 @@ class QwantWorker(QwantProducer, QwantConsumer):
     def launch(self, commit=True):
         for message in self.consumer:
             # self.debug("Getting message",extra={"kafka_key":message.key})
+            print(message)
+            print(type(message))
             data = self.process(value=message.value, key=message.key)
             self.send_message(message=data,
                               key=message.key)
             if commit:
                 self.consumer.commit(message.offset)
-
-            break
 
     @abc.abstractmethod
     def process(self, value, key):
@@ -35,7 +35,7 @@ class QwantWorker(QwantProducer, QwantConsumer):
 
 if __name__ == "__main__":
     qw = QwantWorker(bootstrap_servers="localhost:9092",
-                     listen_topics=["topic_test"],
+                     listen_topics=["produce"],
                      answer_topic="response", group_id=1)
-    qw.process = lambda value, key: {"ok": 1}
+    qw.process = lambda value, key: {"ok": 1, "key": key, "value": value}
     qw.launch(commit=False)

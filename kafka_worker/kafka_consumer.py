@@ -1,3 +1,5 @@
+import json
+
 from kafka import KafkaConsumer
 from qwant_logger.qwant_logger import QwantLogger
 
@@ -11,12 +13,6 @@ class QwantConsumer(QwantLogger):
         super().__init__(logger_name=logger_name, **kwargs)
         self.consumer = KafkaConsumer(bootstrap_servers=bootstrap_servers,
                                       group_id=group_id,
-                                      enable_auto_commit=False)
+                                      enable_auto_commit=False,
+                                      value_deserializer=lambda v: json.loads(v.decode("utf-8")))
         self.consumer.subscribe(topics)
-
-
-if __name__ == "__main__":
-    qc = QwantConsumer(bootstrap_servers="localhost:9092",
-                       logger_name="consumer test", topics=["topic_test"])
-    qc.process = lambda message: print(message)
-    qc.launch()
