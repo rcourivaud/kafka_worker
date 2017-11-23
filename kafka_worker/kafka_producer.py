@@ -27,3 +27,4 @@ if __name__ == "__main__":
     with open("./../data/hit{}.json".format(2), 'r', encoding='utf-8') as f:
         data = json.load(f)
     qp.send_message(message=data)
+    qp.close()
