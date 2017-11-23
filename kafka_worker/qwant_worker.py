@@ -7,11 +7,9 @@ from kafka_worker.kafka_producer import QwantProducer
 
 class QwantWorker(QwantProducer, QwantConsumer):
     def __init__(self, bootstrap_servers, listen_topics, answer_topic, group_id):
-        super().__init__(logger_name=self.__class__,
-                         bootstrap_servers=bootstrap_servers,
-                         topics=listen_topics,
-                         topic=answer_topic,
-                         group_id=group_id)
+        print("qwant_worker : %s" % bootstrap_servers)
+        QwantProducer.__init__(self, self.__class__, answer_topic, group_id, bootstrap_servers)
+        QwantConsumer.__init__(self, self.__class__, listen_topics, group_id, bootstrap_servers)
 
         self.extra = {"bootstrap_servers": bootstrap_servers,
                       "group_id": listen_topics,

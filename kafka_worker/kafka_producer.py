@@ -4,8 +4,9 @@ import json
 
 
 class QwantProducer(QwantLogger):
-    def __init__(self, logger_name, topic, bootstrap_servers, **kwargs):
-        super().__init__(logger_name=logger_name, **kwargs)
+    def __init__(self, logger_name, topic, group_id, bootstrap_servers):
+        print("kafka_producer : %s" % bootstrap_servers)
+        super().__init__(logger_name=logger_name, topics=topic, group_id=group_id, bootstrap_servers=bootstrap_servers)
         self.producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                                       value_serializer=lambda v: json.dumps(v).encode('utf-8'))
         self.topic = topic

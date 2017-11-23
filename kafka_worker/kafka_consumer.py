@@ -3,12 +3,9 @@ from qwant_logger.qwant_logger import QwantLogger
 
 
 class QwantConsumer(QwantLogger):
-    def __init__(self,
-                 logger_name,
-                 topics, group_id,
-                 bootstrap_servers='localhost:9092',
-                 **kwargs):
-        super().__init__(logger_name=logger_name, **kwargs)
+    def __init__(self, logger_name, topics, group_id, bootstrap_servers):
+        print("kafka_consumer : %s" % bootstrap_servers)
+        super().__init__(logger_name=logger_name, topics=topics, group_id=group_id, bootstrap_servers=bootstrap_servers)
         self.consumer = KafkaConsumer(bootstrap_servers=bootstrap_servers,
                                       group_id=group_id,
                                       enable_auto_commit=False)
