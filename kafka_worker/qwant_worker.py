@@ -1,6 +1,4 @@
 import abc
-import json
-
 from kafka_worker.kafka_consumer import QwantConsumer
 from kafka_worker.kafka_producer import QwantProducer
 
@@ -31,11 +29,3 @@ class QwantWorker(QwantProducer, QwantConsumer):
     @abc.abstractmethod
     def process(self, value, key):
         raise NotImplementedError()
-
-
-if __name__ == "__main__":
-    qw = QwantWorker(bootstrap_servers="localhost:9092",
-                     listen_topics=["produce"],
-                     answer_topic="response", group_id=1)
-    qw.process = lambda value, key: {"ok": 1, "key": key, "value": value}
-    qw.launch(commit=False)
