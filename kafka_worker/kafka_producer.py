@@ -20,12 +20,3 @@ class QwantProducer(QwantLogger):
 
     def close(self):
         self.producer.close()
-
-
-if __name__ == "__main__":
-    qp = QwantProducer(logger_name="test", topic='produce', bootstrap_servers="localhost:9092")
-
-    with open("./../data/hit{}.json".format(2), 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    qp.send_message(message=data)
-    qp.close()
