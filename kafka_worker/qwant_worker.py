@@ -15,9 +15,6 @@ class QwantWorker(QwantProducer, QwantConsumer):
 
     def launch(self, commit=True):
         for message in self.consumer:
-            # self.debug("Getting message",extra={"kafka_key":message.key})
-            print(message)
-            print(type(message))
             data = self.process(value=message.value, key=message.key)
             self.send_message(message=data,
                               key=message.key)

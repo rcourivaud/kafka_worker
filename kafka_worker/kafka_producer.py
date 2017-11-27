@@ -15,7 +15,6 @@ class QwantProducer(QwantLogger):
         if topic is None:
             topic = self.topic
         self.producer.send(topic=topic, value=message, key=key, partition=partition)
-        print("sended")
         #self.info("send message", extra={"kafka_message": "message"})
 
     def close(self):
