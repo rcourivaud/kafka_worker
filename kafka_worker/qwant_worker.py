@@ -19,7 +19,7 @@ class QwantWorker(QwantProducer, QwantConsumer):
             self.send_message(message=data,
                               key=message.key)
             if commit:
-                self.consumer.commit(message.offset)
+                self.consumer.commit()
 
     @abc.abstractmethod
     def process(self, value, key):
