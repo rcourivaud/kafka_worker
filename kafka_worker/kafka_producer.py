@@ -1,6 +1,7 @@
+import json
+
 from kafka import KafkaProducer
 from qwant_logger.qwant_logger import QwantLogger
-import json
 
 
 class QwantProducer(QwantLogger):
@@ -15,7 +16,6 @@ class QwantProducer(QwantLogger):
         if topic is None:
             topic = self.topic
         self.producer.send(topic=topic, value=message, key=key, partition=partition)
-        #self.info("send message", extra={"kafka_message": "message"})
 
     def close(self):
         self.producer.close()

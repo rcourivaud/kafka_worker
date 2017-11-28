@@ -1,6 +1,6 @@
 import json
 
-from kafka import KafkaConsumer, TopicPartition
+from kafka import KafkaConsumer
 from qwant_logger.qwant_logger import QwantLogger
 
 
@@ -14,9 +14,5 @@ class QwantConsumer(QwantLogger):
                                       value_deserializer=lambda v: json.loads(v.decode("utf-8")),
                                       auto_offset_reset="earliest")
         self.listen_topics = topics
-        # if partition:
-        #     self.topic_partion = TopicPartition(topic=topics[0], partition=0)
-        #    self.consumer.assign([self.topic_partion])
-        # else:
         self.consumer.subscribe(self.listen_topics)
 
