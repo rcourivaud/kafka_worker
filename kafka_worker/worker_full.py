@@ -59,7 +59,7 @@ class QwantWorker(QwantLogger):
 
 
 if __name__ == "__main__":
-    qw = QwantWorker(bootstrap_servers="172.16.100.10:6667",
+    qw = Worker(bootstrap_servers="172.16.100.10:6667",
                      listen_topics=["bubing-test"],
                      answer_topic="bubing-test-response", group_id=1)
     qw.process = lambda key, value: value
