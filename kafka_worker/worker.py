@@ -6,10 +6,10 @@ from kafka_worker.kafka_consumer import QwantConsumer
 from kafka_worker.kafka_producer import QwantProducer
 
 
-class QwantWorker(QwantProducer, QwantConsumer):
+class Worker(QwantProducer, QwantConsumer):
     def __init__(self, bootstrap_servers, listen_topics, answer_topic, group_id, batch_size, linger_ms,
                  fetch_max_bytes):
-        print("qwant_worker : %s" % bootstrap_servers)
+        print("worker : %s" % bootstrap_servers)
 
         QwantProducer.__init__(self, self.__class__,
                                topic=answer_topic,
