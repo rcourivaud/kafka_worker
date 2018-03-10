@@ -1,14 +1,10 @@
 import json
 
 from kafka import KafkaProducer
-from qwant_logger.qwant_logger import QwantLogger
 
 
-class QwantProducer(QwantLogger):
-    def __init__(self, logger_name, topic, bootstrap_servers, batch_size, linger_ms):
-        print("kafka_producer : %s" % bootstrap_servers)
-        QwantLogger.__init__(self, logger_name=logger_name)
-
+class WorkerProducer:
+    def __init__(self, topic, bootstrap_servers, batch_size, linger_ms):
         self.producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                                       value_serializer=lambda v: json.dumps(v).encode('utf-8'),
                                       batch_size=batch_size,
