@@ -1,13 +1,10 @@
 import json
 
 from kafka import KafkaConsumer
-from qwant_logger.qwant_logger import QwantLogger
 
-
-class QwantConsumer(QwantLogger):
+class KafkaConsumer(QwantLogger):
     def __init__(self, logger_name, topics, group_id, bootstrap_servers, fetch_max_bytes):
         print("kafka_consumer : %s" % bootstrap_servers)
-        QwantLogger.__init__(self, logger_name=logger_name)
         self.consumer = KafkaConsumer(bootstrap_servers=bootstrap_servers,
                                       group_id=group_id,
                                       enable_auto_commit=False,
